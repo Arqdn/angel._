@@ -1,0 +1,34 @@
+# Secrets — never commit these
+.env
+config/settings.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Runtime output
+logs/*.log
+logs/screenshots/
+*.tmp
+
+# Model caches (faster-whisper downloads)
+models/
+.cache/
+
+# Packaging
+build/
+dist/
+*.spec.bak
+
+# OS / editor noise
+Thumbs.db
+Desktop.ini
+.DS_Store
+.idea/
+.vscode/

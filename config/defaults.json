@@ -1,0 +1,86 @@
+{
+  "llm": {
+    "provider": "openrouter",
+    "base_url": "https://openrouter.ai/api/v1",
+    "model": "stealth/ox-alpha",
+    "vision_model": "stealth/ox-alpha",
+    "temperature": 0.7,
+    "max_tokens": 1024,
+    "request_timeout_seconds": 90,
+    "max_tool_iterations": 6,
+    "reasoning_effort": "low",
+    "local_fallback": {
+      "enabled": false,
+      "base_url": "http://localhost:11434/v1",
+      "model": "qwen3:4b",
+      "note": "Optional offline fallback via Ollama/LM Studio. A ~4B Qwen model fits a 6GB RTX 3060."
+    }
+  },
+  "tts": {
+    "provider": "fish",
+    "endpoint": "https://api.fish.audio/v1/tts",
+    "model": "s2.1-pro-free",
+    "reference_id": "",
+    "format": "wav",
+    "sample_rate": 44100,
+    "chunk_length": 200,
+    "normalize": true,
+    "latency": "normal",
+    "volume": 0.9,
+    "enabled": true,
+    "sentence_streaming": true
+  },
+  "stt": {
+    "engine": "faster-whisper",
+    "model_size": "base.en",
+    "device": "auto",
+    "compute_type": "auto",
+    "language": "en",
+    "beam_size": 2
+  },
+  "audio": {
+    "input_device": null,
+    "output_device": null,
+    "sample_rate": 16000,
+    "frame_ms": 30,
+    "vad_sensitivity": 0.5,
+    "vad_min_speech_ms": 250,
+    "vad_end_silence_ms": 700,
+    "vad_max_utterance_s": 20,
+    "vad_pre_roll_ms": 300
+  },
+  "wake": {
+    "enabled": true,
+    "word": "angel",
+    "aliases": ["angel", "angels", "angle", "angeles", "engel", "anjel"],
+    "push_to_talk_enabled": true,
+    "push_to_talk_key": "Space",
+    "follow_up_window_s": 8,
+    "chime": true
+  },
+  "personality": {
+    "name": "Angel",
+    "intensity": 0.7,
+    "verbosity": "balanced",
+    "extra_instructions": ""
+  },
+  "safety": {
+    "require_confirmation": true,
+    "confirm_timeout_s": 30,
+    "disabled_tools": []
+  },
+  "memory": {
+    "max_turns": 24,
+    "long_term_enabled": false
+  },
+  "ui": {
+    "fullscreen": true,
+    "show_conversation": true,
+    "particle_density": 1.0,
+    "reduce_motion": false
+  },
+  "app": {
+    "auto_start": false,
+    "log_level": "INFO"
+  }
+}
