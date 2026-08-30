@@ -77,6 +77,20 @@ class Conversation:
                     return m["content"]
         return ""
 
+    def drop_images(self) -> None:
+        """Replace image parts with placeholders so old screenshots don't get
+        re-sent (and re-billed) with every subsequent request."""
+        with self._lock:
+            for m in self._messages:
+                content = m.get("content")
+                if isinstance(content, list):
+                    m["content"] = [
+                        part if part.get("type") != "image_url"
+                        else {"type": "text",
+                              "text": "[an earlier screenshot, no longer attached]"}
+                        for part in content
+                    ]
+
     def clear(self) -> None:
         with self._lock:
             self._messages.clear()

@@ -286,6 +286,8 @@ class Orchestrator:
                 self._show_error(exc)
                 return
             finally:
+                # Keep history light: screenshots served their purpose this turn.
+                self.conversation.drop_images()
                 if self.mic:
                     self.mic.drain()
                 self.vad.reset()

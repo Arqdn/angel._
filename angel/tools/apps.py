@@ -71,10 +71,17 @@ def _resolve_app(app_name: str) -> str:
     return _APP_ALIASES.get(app_name.strip().lower(), app_name.strip())
 
 
+# The model chooses app_name; never let it smuggle shell metacharacters into
+# the cmd line. Windows app names / aliases never legitimately contain these.
+_FORBIDDEN_CHARS = set('"&|<>^%!;\r\n')
+
+
 def open_application(app_name: str) -> ToolResult:
     target = _resolve_app(app_name)
     if not target:
         return ToolResult(False, "no application name given")
+    if any(c in _FORBIDDEN_CHARS for c in target):
+        return ToolResult(False, f"'{app_name}' is not a valid application name")
     if not IS_WINDOWS:
         return ToolResult(False, f"can only open applications on Windows "
                                  f"(would have opened '{target}')")
